@@ -1,0 +1,13 @@
+prefix: "&e&lSolver&c&lMotd &8»"
+reload_success: "{prefix} &aConfiguration reloaded successfully!"
+reload_no_permission: "{prefix} &cYou don't have permission &e{permission} &cfor this!"
+help_message: |-
+  &8&m-----------------------------------------------------
+  &e&lSolver&c&lMOTD &7(v1.1.1)
+  &8&m-----------------------------------------------------
+  &6Available Commands:
+  &e/smotd reload &7- Reload config files
+  &e/smotd help &7- Show this message
+  &8&m-----------------------------------------------------
+invalid_command: "{prefix} &cInvalid command. Use &e/smotd help"
+config_regenerated: "{prefix} &aRegenerated File: &e{file}"

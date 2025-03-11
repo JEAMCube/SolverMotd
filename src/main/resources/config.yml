@@ -1,0 +1,4 @@
+motd:
+  line1: "§r      §f§k! §e§lSolver§c§lMOTD §3§lPlugin §2[1.21] §4❤ §f§k!§r"
+  line2: "         &aSetup your &eConfig.yml &afile!"
+use_papi: true
