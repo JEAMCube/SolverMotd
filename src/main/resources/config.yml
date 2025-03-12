@@ -1,4 +1,13 @@
 motd:
-  line1: "§r      §f§k! §e§lSolver§c§lMOTD §3§lPlugin §2[1.21] §4❤ §f§k!§r"
+  line1: "§r      §f§k! §e§lSolver§c§lMOTD §3§lPlugin §2[1.8 - 1.21] §4❤ §f§k!§r"
   line2: "         &aSetup your &eConfig.yml &afile!"
+## Example 1
+##  line1: "§r   §6§lSolverCraft§r §6§lNetwork§8§l §8┃┃ §b§lSKYBLOCK §f§lUPDATE§r"
+##  line2: "§e   example§l.§ecom §71.8-1.21 §8┃┃ §fInfo: §7jeam§l.§7one/solvermotd"
+## Example 2
+##  line1: "§r       §6§lSOLVERCRA§e§lFT NE§6§lTWORK §8(§71.8 - 1.21§8)§r"
+##  line2: "§r           §6§l¡BOXPVP! §7Available §fNow!§7."
+## Example 3
+##  line1: "§f        『§l SOLVER§e§lCRAFT§e 』§6§l(§e1.8 - 1.21.x§6§l)§r"
+##  line2: "          §a§l§n¡COME MAKE GREAT FRIENDS!"
 use_papi: true
