@@ -3,7 +3,7 @@ reload_success: "{prefix} &aConfiguration reloaded successfully!"
 reload_no_permission: "{prefix} &cYou don't have permission &e{permission} &cfor this!"
 help_message: |-
   &8&m-----------------------------------------------------
-  &e&lSolver&c&lMOTD &7(v1.1.1)
+  &e&lSolver&c&lMOTD &7(v1.1.2)
   &8&m-----------------------------------------------------
   &6Available Commands:
   &e/smotd reload &7- Reload config files
