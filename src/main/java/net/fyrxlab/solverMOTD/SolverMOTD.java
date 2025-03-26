@@ -7,6 +7,7 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.Component;
+import net.fyrxlab.solverMOTD.org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor; // Minecraft color codes handling
 import org.bukkit.command.Command; // Command handling
 import org.bukkit.command.CommandSender; // Command sender handling
@@ -45,6 +46,11 @@ public final class SolverMOTD extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+
+        // bStats ID
+        int pluginId = 25243;
+        Metrics metrics = new Metrics(this, pluginId);
+        getLogger().info("SolverMOTD has connected with bStats");
         // Initialize custom YAML handler for comment preservation
         commentYaml = new CommentPreservingYaml();
 
@@ -172,11 +178,11 @@ public final class SolverMOTD extends JavaPlugin implements Listener {
         // Format and set MOTD
         String finalMotd;
         if (useMiniMessage) {
-            // Si MiniMessage está activado en config.yml
+            // If MiniMessage is active on config.yml
             Component motdComponent = miniMessage.deserialize(line1 + "\n" + line2);
             finalMotd = LegacyComponentSerializer.legacySection().serialize(motdComponent);
         } else {
-            // Si está desactivado, usar formato legacy (&)
+            // If MiniMessage is desactivated it will use Legacy (&)
             finalMotd = ChatColor.translateAlternateColorCodes('&', line1) + "\n" +
                     ChatColor.translateAlternateColorCodes('&', line2);
         }
