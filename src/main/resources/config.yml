@@ -30,3 +30,4 @@ motd:
 ##   line2: "          §a§l§n¡COME MAKE GREAT FRIENDS!"
 
 use_papi: true
+use_minimessage: false

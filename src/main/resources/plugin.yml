@@ -1,8 +1,8 @@
 name: SolverMOTD
-version: '1.1.2-SNAPSHOT'
+version: '1.2.0-SNAPSHOT'
 main: net.fyrxlab.solverMOTD.SolverMOTD
 api-version: '1.13'
-softdepend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI, Adventure]
 commands:
   smotd:
     description: Reload plugin config.

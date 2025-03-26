@@ -1,9 +1,10 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
 }
 
 group = 'net.fyrxlab'
-version = '1.1.2-SNAPSHOT'
+version = '1.2.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -27,7 +28,18 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
     compileOnly("me.clip:placeholderapi:2.11.6")
+    implementation 'org.yaml:snakeyaml:2.4'
+    implementation "net.kyori:adventure-api:4.19.0"
+    implementation "net.kyori:adventure-text-minimessage:4.19.0"
+    implementation "net.kyori:adventure-text-serializer-legacy:4.19.0"
 }
+
+shadowJar {
+    relocate 'net.kyori.adventure', 'net.fyrxlab.solvermotd.libs.adventure'
+    relocate 'org.yaml.snakeyaml', 'net.fyrxlab.solvermotd.libs.snakeyaml'
+}
+
+tasks.build.dependsOn shadowJar
 
 def targetJavaVersion = 11
 java {

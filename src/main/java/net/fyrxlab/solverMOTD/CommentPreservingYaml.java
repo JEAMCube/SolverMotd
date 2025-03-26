@@ -8,9 +8,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
+
 
 public class CommentPreservingYaml {
     private final Yaml yaml;
@@ -19,8 +21,9 @@ public class CommentPreservingYaml {
         DumperOptions options = new DumperOptions();
         options.setIndent(2);
         options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-        // Se utiliza un Representer personalizado para controlar el estilo de los scalars
-        this.yaml = new Yaml(new CommentRepresenter(), options);
+
+        // Crear el Representer pasando las opciones
+        this.yaml = new Yaml(new CommentRepresenter(options), options);
     }
 
     /**
@@ -42,12 +45,12 @@ public class CommentPreservingYaml {
     }
 
     /**
-     * Guarda el contenido del Map en un archivo YAML, añadiendo un header (comentarios) si se proporciona.
+     * Guarda el contenido del Map en un archivo YAML, preservando comentarios si se proporciona.
      *
      * @param data   Datos a guardar.
      * @param file   Archivo de destino.
-     * @param header Cadena de header (comentarios) a incluir al inicio.
-     * @throws IOException Si ocurre algún error de escritura.
+     * @param header Comentarios a agregar al principio del archivo YAML.
+     * @throws IOException Si ocurre un error de escritura.
      */
     public void save(Map<String, Object> data, File file, String header) throws IOException {
         try (FileWriter writer = new FileWriter(file)) {
@@ -60,11 +63,10 @@ public class CommentPreservingYaml {
     }
 
     /**
-     * Realiza la fusión (merge) entre el mapa de valores por defecto y el mapa actual,
-     * añadiendo las claves que no existen en el mapa actual.
+     * Fusión de mapas, añadiendo claves de defaults al mapa actual si no existen.
      *
-     * @param defaults Mapa con los valores por defecto.
-     * @param current  Mapa actual a actualizar.
+     * @param defaults Mapa con valores predeterminados.
+     * @param current  Mapa actual que se va a fusionar.
      */
     public void mergeMaps(Map<String, Object> defaults, Map<String, Object> current) {
         for (Map.Entry<String, Object> entry : defaults.entrySet()) {
@@ -73,7 +75,7 @@ public class CommentPreservingYaml {
             if (!current.containsKey(key)) {
                 current.put(key, value);
             } else if (value instanceof Map && current.get(key) instanceof Map) {
-                // Fusión recursiva de sub-mapas
+                // Fusión recursiva de submapas
                 mergeMaps((Map<String, Object>) value, (Map<String, Object>) current.get(key));
             }
         }
@@ -85,10 +87,15 @@ public class CommentPreservingYaml {
      * de lo contrario utiliza el estilo PLAIN (null).
      */
     private static class CommentRepresenter extends Representer {
+        public CommentRepresenter(DumperOptions options) {
+            super(options); // Ahora se pasa DumperOptions al constructor
+        }
+
         @Override
-        protected Node representScalar(Tag tag, String value, Character style) {
-            Character newStyle = value.contains("\n") ? '|' : null;
+        protected Node representScalar(Tag tag, String value, DumperOptions.ScalarStyle style) {
+            DumperOptions.ScalarStyle newStyle = value.contains("\n") ? DumperOptions.ScalarStyle.LITERAL : style;
             return super.representScalar(tag, value, newStyle);
         }
     }
+
 }
